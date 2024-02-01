@@ -1,0 +1,41 @@
+{
+  "name": "vue3project",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "f2elint-scan": "f2elint scan",
+    "f2elint-fix": "f2elint fix"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "@iconify-json/ep": "^1.1.14",
+    "axios": "^1.6.7",
+    "element-plus": "^2.5.3",
+    "file-saver": "^2.0.5",
+    "js-cookie": "^3.0.5",
+    "less": "^4.2.0",
+    "less-loader": "^12.2.0",
+    "pinia": "^2.1.7",
+    "stylelint": "^16.2.0",
+    "unplugin-auto-import": "^0.17.5",
+    "unplugin-icons": "^0.18.3",
+    "unplugin-vue-components": "^0.26.0",
+    "vue": "^3.3.11",
+    "vue-router": "^4.2.5",
+    "vuex": "next"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.5.2",
+    "f2elint": "^2.2.1",
+    "vite": "^5.0.8"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "f2elint commit-file-scan",
+      "commit-msg": "f2elint commit-msg-scan"
+    }
+  }
+}
