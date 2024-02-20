@@ -29,29 +29,29 @@ const useUserStore = defineStore('user', {
     //   })
     // },
     // 获取用户信息
-    // getInfo () {
-    //   return new Promise((resolve, reject) => {
-    //     this.name = '验证码'
-    //     resolve(this.name)
-    //     // getInfo()
-    //     //   .then((res) => {
-    //     //     const { user } = res;
-    //     //     if (res.roles && res.roles.length > 0) {
-    //     //       // 验证返回的roles是否是一个非空数组
-    //     //       this.roles = res.roles;
-    //     //       this.permissions = res.permissions;
-    //     //     } else {
-    //     //       this.roles = ['ROLE_DEFAULT'];
-    //     //     }
-    //     //     this.id = user.userId;
-    //     // this.name = user.userName;
-    //     // resolve(res);
-    //     // })
-    //     // .catch((error) => {
-    //     //   reject(error);
-    //     // });
-    //   })
-    // },
+    getInfo () {
+      return new Promise((resolve, reject) => {
+        this.name = '验证码'
+        resolve(this.name)
+        // getInfo()
+        //   .then((res) => {
+        //     const { user } = res;
+        //     if (res.roles && res.roles.length > 0) {
+        //       // 验证返回的roles是否是一个非空数组
+        //       this.roles = res.roles;
+        //       this.permissions = res.permissions;
+        //     } else {
+        //       this.roles = ['ROLE_DEFAULT'];
+        //     }
+        //     this.id = user.userId;
+        // this.name = user.userName;
+        // resolve(res);
+        // })
+        // .catch((error) => {
+        //   reject(error);
+        // });
+      })
+    },
     // 退出系统
     // logOut () {
     //   return new Promise((resolve, reject) => {
