@@ -1,23 +1,46 @@
-import { defineConfig, loadEnv } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import path from 'path';
-import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-import Icons from 'unplugin-icons/vite';
-import IconsResolver from 'unplugin-icons/resolver';
-
+import { defineConfig, loadEnv } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import path from 'path'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import Compression from 'vite-plugin-compression'
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {
-  const env = loadEnv(mode, process.cwd());
-  const { VITE_APP_ENV } = env;
-  console.log(env, 'env');
+  const env = loadEnv(mode, process.cwd())
+  const { VITE_APP_ENV, VITE_BUILD_COMPRESS } = env
+  const plugin = []
+  console.log(env, command, 'env')
+  if (VITE_BUILD_COMPRESS) {
+    const compressList = VITE_BUILD_COMPRESS.split(',')
+    if (compressList.includes('gzip')) {
+      // http://doc.ruoyi.vip/ruoyi-vue/other/faq.html#使用gzip解压缩静态文件
+      plugin.push(
+        Compression({
+          ext: '.gz',
+          deleteOriginFile: false
+        })
+      )
+    }
+    if (compressList.includes('brotli')) {
+      plugin.push(
+        Compression({
+          ext: '.br',
+          algorithm: 'brotliCompress',
+          deleteOriginFile: false
+        })
+      )
+    }
+  }
   return {
     // 部署生产环境和开发环境下的URL。
     // 默认情况下，vite 会假设你的应用是被部署在一个域名的根路径上
     // 例如 https://www.ruoyi.vip/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 https://www.ruoyi.vip/admin/，则设置 baseUrl 为 /admin/。
     base: VITE_APP_ENV === 'production' ? '/' : '/',
     plugins: [
+      ...plugin,
       vue(),
       AutoImport({
         imports: ['vue', 'vue-router', 'pinia'],
@@ -40,6 +63,7 @@ export default defineConfig(({ mode, command }) => {
         autoInstall: true,
       }),
     ],
+
     resolve: {
       // https://cn.vitejs.dev/config/#resolve-alias
       alias: {
@@ -82,5 +106,5 @@ export default defineConfig(({ mode, command }) => {
     //     ],
     //   },
     // },
-  };
-});
+  }
+})
