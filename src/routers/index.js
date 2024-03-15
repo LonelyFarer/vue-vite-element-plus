@@ -1,4 +1,4 @@
-import { createWebHistory, createRouter } from 'vue-router';
+import { createWebHistory, createRouter } from 'vue-router'
 
 // 公共路由
 export const constantRoutes = [
@@ -17,18 +17,23 @@ export const constantRoutes = [
     component: () => import('@/views/error/404'),
     hidden: true,
   },
-];
+  // {
+  //   path: '/spread',
+  //   component: () => import('@/views/spread/spreadExcel'),
+  //   hidden: true,
+  // },
+]
 
 const router = createRouter({
   history: createWebHistory(),
   routes: constantRoutes,
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
-      return savedPosition;
+      return savedPosition
     } else {
-      return { top: 0 };
+      return { top: 0 }
     }
   },
-});
+})
 
-export default router;
+export default router
